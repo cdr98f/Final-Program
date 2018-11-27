@@ -45,6 +45,7 @@ class Customer
     short m_weight;
     short m_chol;
     bool m_isAlive;
+    bool m_isContestant;
     short m_health;
 };
 #endif
