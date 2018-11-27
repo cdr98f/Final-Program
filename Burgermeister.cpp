@@ -20,7 +20,13 @@ Burgermeister :: Burgermeister(const string name, const float money)
 
 float operator += (Burgermeister & lhs, const float & rhs)
 {
-  lhs.m_name += rhs;
-  return lhs.m_name;
+  lhs.m_money += rhs;
+  return lhs.m_money;
+}
+
+float operator -= (Burgermeister & lhs, const float & rhs)
+{
+  lhs.m_money -= rhs;
+  return lhs.m_money;
 }
 
