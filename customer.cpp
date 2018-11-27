@@ -62,10 +62,22 @@ ostream & operator << (ostream & os, const Customer & cust)
   return os;
 }
 
-void Customer::eat(const Burger & b1)
+void Customer::eat(const Burger & b1, bool & vomit)
 { 
- if(b1.getVirus())
-    m_isAlive = false;
+  if(b1.getVirus())
+  {
+    if((rand() % 101 + 1) > m_health))
+    {
+      m_health = 0;
+      m_isAlive = false;
+      m_isContestant = false;
+    }
+    else
+    {
+      vomit = true;
+      m_health = m_health/2;
+    }
+  }
   
   m_chol += 2.5 * b1.getBacon() + (PI/2)*b1.getPatties() 
          + static_cast <float> (m_weight)/((b1.getPickles() + 1) * 10);
@@ -77,3 +89,8 @@ void Customer::eat(const Burger & b1)
   m_wallet = m_wallet - b1.getPrice();
   return;
 } 
+
+void Customer::turn(Customer contestants[], bool & eat)
+{
+	
+	
