@@ -9,5 +9,11 @@ using namespace std;
 
 Burgermeister :: Burgermeister(const string name, const float money)
 {
-
+  m_name = name;
+  if(money > 0)
+  {
+    m_money = money;
+  }
+  else
+    exit(2);
 }
