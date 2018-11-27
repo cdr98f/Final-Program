@@ -17,3 +17,10 @@ Burgermeister :: Burgermeister(const string name, const float money)
   else
     exit(2);
 }
+
+float operator += (Burgermeister & lhs, const float & rhs)
+{
+  lhs.m_name += rhs;
+  return lhs.m_name;
+}
+
