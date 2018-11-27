@@ -37,6 +37,8 @@ class Customer
   public:
     Customer ();
     void eat(const Burger & burg);
+    int toss();
+    void turn(const Burger & burg);
     friend ostream & operator<< (ostream & os, const Customer & cust);
      
   private:
