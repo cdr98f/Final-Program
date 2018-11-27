@@ -40,6 +40,8 @@ Customer :: Customer()
   m_weight = (rand() % (MAX_POUNDS - MIN_POUNDS + 1)) + MIN_WALLET;
   
   m_chol = (rand() % (MAX_CHOL - MIN_CHOL + 1)) + MIN_CHOL;
+	
+  m_health = (rand() % (MAX_HEALTH - MIN_HEALTH + 1)) + MIN_HEALTH;
   
   count++;
 }
