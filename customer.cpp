@@ -42,6 +42,8 @@ Customer :: Customer()
   m_chol = (rand() % (MAX_CHOL - MIN_CHOL + 1)) + MIN_CHOL;
 	
   m_health = (rand() % (MAX_HEALTH - MIN_HEALTH + 1)) + MIN_HEALTH;
+	
+  m_isContestant = true;
   
   count++;
 }
@@ -61,8 +63,8 @@ ostream & operator << (ostream & os, const Customer & cust)
 }
 
 void Customer::eat(const Burger & b1)
-{
-  if(b1.getVirus())
+{ 
+ if(b1.getVirus())
     m_isAlive = false;
   
   m_chol += 2.5 * b1.getBacon() + (PI/2)*b1.getPatties() 
