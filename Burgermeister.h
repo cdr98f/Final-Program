@@ -14,8 +14,8 @@ class Burgermeister
     friend float operator +=(Burgermeister & lhs, const float & rhs);
   
   private:
-    string name;
-    float money;
+    string m_name;
+    float m_money;
 };
 
 #endif
