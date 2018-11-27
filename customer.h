@@ -40,8 +40,9 @@ class Customer
   private:
     string m_custName;
     float m_wallet;
-    int m_weight;
+    short m_weight;
     short m_chol;
     bool m_isAlive;
+    short m_health;
 };
 #endif
