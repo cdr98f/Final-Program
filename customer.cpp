@@ -1,7 +1,6 @@
-//Programmer: Marshall Vaccaro		Date: 11/9/2018
-//File: custClass.cpp
-//Purpose: To define and test customer and burger classes
-//         and their functions
+//Programmers: Carson Ripple, Marshall Vacarro	//Date: 12/05/2018
+//File: customer.cpp
+//Purpose: To simulate a burger eating contest and determine a winner.
 
 #include "customer.h"
 #include <iostream>
@@ -45,6 +44,8 @@ Customer :: Customer()
 	
   m_isContestant = true;
   
+  m_weightGain = 0;
+  
   count++;
 }
 
@@ -85,12 +86,89 @@ void Customer::eat(const Burger & b1, bool & vomit)
   m_weight += 0.5*b1.getPatties() * b1.getPatties() + .125 * b1.getBacon()
            * b1.getBacon() - static_cast <float> (b1.getPickles())/4 
            + CHEESEGAIN + SAUCEGAIN;
-		
+	
+  m_weightGain += 0.5*b1.getPatties() * b1.getPatties() + .125 * b1.getBacon()
+           * b1.getBacon() - static_cast <float> (b1.getPickles())/4 
+           + CHEESEGAIN + SAUCEGAIN;	
   m_wallet = m_wallet - b1.getPrice();
+  m_health -= 2;
   return;
 } 
 
-void Customer::turn(Customer contestants[], bool & eat)
+void Customer::turn(Customer people[], Burgermeister & Krusty,
+ const int index)
 {
+  int i = index;
+  bool ifVomit;
+  bool continueChain = true;
+  Burger newBurger;
+  if ((m_wallet > newBurger.getPrice()) && m_isAlive && m_isContestant)
+  {
+    Krusty += newBurger.getPrice();
+    eat(newBurger, ifVomit);
+    m_isAlive = checkAlive();
+    if (!m_isAlive)
+      Krusty -= FUNERAL_FEE;
+  }
+  if (ifVomit && (index < AMNT_CUSTOMERS - 1) && (m_isAlive))
+  {
+    do
+    {
+      continueChain = vomit(people, index + 1);
+      index++;
+    }
+    while ((continueChain) || (index < AMNT_CUSTOMERS));
+    do
+    {
+      continueChain = vomit(people, i - 1);
+      i--;
+    }
+    while ((continueChain) || (i >= 0));
+  }
+    
+  
+  return;
+}
 	
-	
+bool checkAlive()
+{
+  bool alive = true;
+  if ((m_health <= DEATH_HEALTH) || (m_chol > MAX_CHOL) 
+   || (m_weightGain > MAX_WEIGHT_GAIN))
+    alive = false;
+    
+  return alive;
+}
+
+const bool getAlive()
+{
+  return m_isAlive;
+}
+
+bool vomit(const Customer people[], const int index)
+{
+  bool contVomit = false
+  if (rand()%2 == 1 && people[index].getAlive())
+    contVomit = true;
+  else if ((rand() % 10) < 7 && people[index].getAlive())
+    people[index].toss(index);
+            
+  return contVomit;
+}
+
+void toss(Customer contestants[], const int place)
+{
+  int personHit;
+  
+  personHit = rand() % (AMNT_CUSTOMERS + 1);
+  
+  if (personHit == KRUSTY_NUM)
+  {
+    m_isContestant = false;
+    Krusty += m_wallet;
+  }
+  else if (((rand() % 10) < 8) && (personHit != place))
+    contestants[personHit].toss(personHit);
+        
+  return;
+}
