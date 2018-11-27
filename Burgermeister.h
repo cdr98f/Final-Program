@@ -5,6 +5,8 @@
 #ifndef BURGERMEISTER_H
 #define BURGERMEISTER_H
 
+const string BURGERMEISTER_NAME = "Krusty";
+
 class Burgermeister
 {
   public:
