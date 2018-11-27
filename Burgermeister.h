@@ -12,6 +12,7 @@ class Burgermeister
   public:
     Burgermeister(const string name, const float money);
     friend float operator +=(Burgermeister & lhs, const float & rhs);
+    friend float operator -=(Burgermeister & lhs, const float & rhs);
   
   private:
     string m_name;
