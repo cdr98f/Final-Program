@@ -5,14 +5,18 @@
 #ifndef BURGERMEISTER_H
 #define BURGERMEISTER_H
 
+#include <iostream>
+using namespace std;
+
 const string BURGERMEISTER_NAME = "Krusty";
+const int BURGERMEISTER_MONEY = 100;
 
 class Burgermeister
 {
   public:
     Burgermeister(const string name, const float money);
-    friend float operator +=(Burgermeister & lhs, const float & rhs);
-    friend float operator -=(Burgermeister & lhs, const float & rhs);
+    friend void operator +=(Burgermeister & lhs, const float & rhs);
+    friend void operator -=(Burgermeister & lhs, const float & rhs);
   
   private:
     string m_name;

@@ -67,7 +67,7 @@ void Customer::eat(const Burger & b1, bool & vomit)
 { 
   if(b1.getVirus())
   {
-    if((rand() % 101 + 1) > m_health))
+    if((rand() % 101 + 1) > m_health)
     {
       m_health = 0;
       m_isAlive = false;
@@ -96,7 +96,7 @@ void Customer::eat(const Burger & b1, bool & vomit)
 } 
 
 void Customer::turn(Customer people[], Burgermeister & Krusty,
- const int index)
+ int index)
 {
   int i = index;
   bool ifVomit;
@@ -114,13 +114,13 @@ void Customer::turn(Customer people[], Burgermeister & Krusty,
   {
     do
     {
-      continueChain = vomit(people, index + 1);
+      continueChain = vomit(people, index + 1, Krusty);
       index++;
     }
     while ((continueChain) || (index < AMNT_CUSTOMERS));
     do
     {
-      continueChain = vomit(people, i - 1);
+      continueChain = vomit(people, i - 1, Krusty);
       i--;
     }
     while ((continueChain) || (i >= 0));
@@ -130,7 +130,7 @@ void Customer::turn(Customer people[], Burgermeister & Krusty,
   return;
 }
 	
-bool checkAlive()
+bool Customer:: checkAlive()
 {
   bool alive = true;
   if ((m_health <= DEATH_HEALTH) || (m_chol > MAX_CHOL) 
@@ -140,23 +140,23 @@ bool checkAlive()
   return alive;
 }
 
-const bool getAlive()
+bool Customer:: getAlive() const 
 {
   return m_isAlive;
 }
 
-bool vomit(const Customer people[], const int index)
+bool Customer:: vomit(Customer people[], const int index, Burgermeister & Krusty)
 {
-  bool contVomit = false
+  bool contVomit = false;
   if (rand()%2 == 1 && people[index].getAlive())
     contVomit = true;
   else if ((rand() % 10) < 7 && people[index].getAlive())
-    people[index].toss(index);
+    people[index].toss(people, index, Krusty);
             
   return contVomit;
 }
 
-void toss(Customer contestants[], const int place)
+void Customer:: toss(Customer contestants[], const int place, Burgermeister & Krusty)
 {
   int personHit;
   
@@ -168,7 +168,7 @@ void toss(Customer contestants[], const int place)
     Krusty += m_wallet;
   }
   else if (((rand() % 10) < 8) && (personHit != place))
-    contestants[personHit].toss(personHit);
+    contestants[personHit].toss(contestants, personHit, Krusty);
         
   return;
 }

@@ -1,7 +1,6 @@
-//Programmer: Marshall Vaccaro		Date: 11/9/2018
-//File: burgClass.h
-//Purpose: To define and test customer and burger classes
-//         and their functions
+//Programmers: Carson Ripple, Marshall Vacarro	//Date: 12/05/2018
+//File: burger.h
+//Purpose: To simulate a burger eating contest and determine a winner.
 
 #ifndef BURGCLASS_H
 #define BURGCLASS_H

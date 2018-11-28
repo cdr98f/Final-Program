@@ -14,14 +14,14 @@ int main()
   Customer contestants[AMNT_OF_PEOPLE];
   Burgermeister Krusty(BURGERMEISTER_NAME,BURGERMEISTER_MONEY);
   
-  do
-  {
-    for(int i = 0; i < AMNT_OF_PEOPLE; i++)
-    {
-      contestants[i].turn(contestants, Krusty, i);
-    }
+  //do
+ // {
+   // for(int i = 0; i < AMNT_OF_PEOPLE; i++)
+    
+      contestants[1].turn(contestants, Krusty, 1);
+    
    
    
-  } while ();
+ // } while ();
   return 0;
 }

@@ -1,7 +1,6 @@
-//Programmer: Marshall Vaccaro		Date: 11/9/2018
+//Programmers: Carson Ripple, Marshall Vacarro	//Date: 12/05/2018
 //File: burger.cpp
-//Purpose: To define and test customer and burger classes
-//         and their functions
+//Purpose: To simulate a burger eating contest and determine a winner.
 
 #include "burger.h"
 using namespace std;

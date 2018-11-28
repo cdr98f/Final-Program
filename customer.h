@@ -42,12 +42,12 @@ class Customer
 {
   public:
     Customer ();
-    void eat(const Burger & burg);
-    void toss(Customer contestants[], const int place);
+    void eat(const Burger & b1, bool & vomit);
+    void toss(Customer contestants[], const int place, Burgermeister & Krusty);
     void turn(Customer people[], Burgermeister & Krusty, 
     const int index);
     bool checkAlive();
-    bool vomit(const Customer people[], const int index);
+    bool vomit(Customer people[], int index, Burgermeister & Krusty);
     friend ostream & operator<< (ostream & os, const Customer & cust);
     bool getAlive() const;
      

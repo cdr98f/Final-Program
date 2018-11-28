@@ -2,8 +2,8 @@
 //File: Burgermeister.h
 //Purpose: To simulate a burger eating contest and determine a winner.
 
-#include "Burgermeister.h";
-#include <iostream>;
+#include "Burgermeister.h"
+#include <iostream>
 
 using namespace std;
 
@@ -18,15 +18,15 @@ Burgermeister :: Burgermeister(const string name, const float money)
     exit(2);
 }
 
-float operator += (Burgermeister & lhs, const float & rhs)
+void operator += (Burgermeister & lhs, const float & rhs)
 {
   lhs.m_money += rhs;
-  return lhs.m_money;
+  return;
 }
 
-float operator -= (Burgermeister & lhs, const float & rhs)
+void operator -= (Burgermeister & lhs, const float & rhs)
 {
   lhs.m_money -= rhs;
-  return lhs.m_money;
+  return;
 }
 
