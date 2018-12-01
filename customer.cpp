@@ -72,6 +72,7 @@ void Customer::eat(const Burger & b1, bool & vomit)
       m_health = 0;
       m_isAlive = false;
       m_isContestant = false;
+      cout << m_custName << " just died!" << endl;
     }
     else
     {
@@ -90,39 +91,55 @@ void Customer::eat(const Burger & b1, bool & vomit)
   m_weightGain += 0.5*b1.getPatties() * b1.getPatties() + .125 * b1.getBacon()
            * b1.getBacon() - static_cast <float> (b1.getPickles())/4 
            + CHEESEGAIN + SAUCEGAIN;	
+  
   m_wallet = m_wallet - b1.getPrice();
+  
   m_health -= 2;
+  
   return;
 } 
 
+//Output done here
+//I made index constant. It should be so you keep track of the center of the loops
 void Customer::turn(Customer people[], Burgermeister & Krusty,
- int index)
+ const int index)
 {
   int i = index;
   bool ifVomit;
   bool continueChain = true;
   Burger newBurger;
+  
   if ((m_wallet > newBurger.getPrice()) && m_isAlive && m_isContestant)
   {
     Krusty += newBurger.getPrice();
     eat(newBurger, ifVomit);
-    m_isAlive = checkAlive();
+    m_isAlive = checkAlive(); //not sure it this is necessary since you checked in eat
     if (!m_isAlive)
       Krusty -= FUNERAL_FEE;
   }
-  if (ifVomit && (index < AMNT_CUSTOMERS - 1) && (m_isAlive))
+  
+  //vomit sequence
+  if(ifVomit)
+    cout << m_custName << " has vomited." << endl;
+  //can you explain the use of index here
+  if (ifVomit && (index < AMNT_CUSTOMERS - 1) && (m_isAlive)) //Idk if you need m_isAlive
   {
     do
     {
-      continueChain = vomit(people, index + 1, Krusty);
-      index++;
+      continueChain = vomit(people, i + 1, Krusty);
+      if (continueChain)
+        cout << people[i+1] << " has vomited. "<< endl;
+      i++; //may walk off this array in line above
     }
     while ((continueChain) || (index < AMNT_CUSTOMERS));
+    i = index;
     do
     {
       continueChain = vomit(people, i - 1, Krusty);
+      if (continueChain)
+        cout << people[i-1] << " has vomited." << endl;
       i--;
-    }
+    } //again this may walk off array
     while ((continueChain) || (i >= 0));
   }
     
@@ -130,7 +147,7 @@ void Customer::turn(Customer people[], Burgermeister & Krusty,
   return;
 }
 	
-bool Customer:: checkAlive()
+bool Customer::checkAlive()
 {
   bool alive = true;
   if ((m_health <= DEATH_HEALTH) || (m_chol > MAX_CHOL) 
@@ -140,11 +157,12 @@ bool Customer:: checkAlive()
   return alive;
 }
 
-bool Customer:: getAlive() const 
+bool Customer::getAlive() const 
 {
   return m_isAlive;
 }
 
+//no need for output, vomit loop is taken care of elsewhere
 bool Customer:: vomit(Customer people[], const int index, Burgermeister & Krusty)
 {
   bool contVomit = false;
@@ -152,23 +170,47 @@ bool Customer:: vomit(Customer people[], const int index, Burgermeister & Krusty
     contVomit = true;
   else if ((rand() % 10) < 7 && people[index].getAlive())
     people[index].toss(people, index, Krusty);
-            
+  
   return contVomit;
 }
 
+//have output for food fight now
 void Customer:: toss(Customer contestants[], const int place, Burgermeister & Krusty)
 {
+  //calling customer threw the burger
   int personHit;
+  burger thrownBurg;
+  bool isThrown = (rand() % 10) < 8)
   
   personHit = rand() % (AMNT_CUSTOMERS + 1);
   
-  if (personHit == KRUSTY_NUM)
+  //if the thrown burger hit krusty
+  if (personHit == KRUSTY_NUM && m_isAlive && isThrown)
   {
+    cout << m_custName << " has thrown a burger at Krusty!" << endl;
+    cout << m_custName << " is disqualified." << endl;
     m_isContestant = false;
-    Krusty += m_wallet;
+    Krusty += m_wallet; 
   }
-  else if (((rand() % 10) < 8) && (personHit != place))
+  //if the 
+  else if (personHit != place && isAlive && isThrown)
+  {
+    cout << m_custName << " has thrown a burger at " << contestants[personHit].m_custName;
+    Krusty += thrownBurg.getPrice(); //Not sure on this function
+    m_wallet -= thrownBurg.getPrice(); //Transaction for the burgers
     contestants[personHit].toss(contestants, personHit, Krusty);
-        
+  }
+  else if (personHit == place && isAlive && isThrown)// so user knows the fight ended
+  {
+    m_wallet -= thrownBurg.getPrice(); //Transaction for the burgers
+    cout << m_custName << " threw a burger on themself." << endl;
+  }
+  else if (!isAlive)
+  {
+    cout << m_custname << " is dead and can't participate." << endl;
+  }
+  else
+    cout << m_custName << " chose not to throw." << endl;
+  
   return;
 }
