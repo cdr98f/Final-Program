@@ -13,15 +13,14 @@ int main()
   const int AMNT_OF_PEOPLE = 15;
   Customer contestants[AMNT_OF_PEOPLE];
   Burgermeister Krusty(BURGERMEISTER_NAME,BURGERMEISTER_MONEY);
+  string nextStep;
   
-  do
+  for (int j = 0; j < 10; j++)
   {
     for(int i = 0; i < AMNT_OF_PEOPLE; i++)
-    
       contestants[1].turn(contestants, Krusty, 1);
-    
+    cin << nextStep; //this is just to slow things down for now
+  } //obviously this will need to be changed back into a do while
    
-   
-  } while ();
   return 0;
 }
