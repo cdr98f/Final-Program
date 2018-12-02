@@ -34,7 +34,7 @@ const float VOMIT_FEE = 5;
 //eat():
 //Description: eat() takes a burger object and uses variables 
 //  describing the burger to change information about the calling customer
-//Pre: none
+//Pre: nonek.rt,
 //Post: information about the calling customer is changed 
 //  according to the information associated with the burger argument
 
@@ -50,6 +50,7 @@ class Customer
     bool vomit(Customer people[], int index, Burgermeister & Krusty);
     friend ostream & operator<< (ostream & os, const Customer & cust);
     bool getAlive() const;
+    short getWinConditions(bool & isContestant) const;
      
   private:
     string m_custName;
@@ -60,5 +61,6 @@ class Customer
     bool m_isAlive;
     bool m_isContestant;
     short m_health;
+    short m_numEaten; 
 };
 #endif
