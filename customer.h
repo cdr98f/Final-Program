@@ -45,12 +45,12 @@ class Customer
     void eat(const Burger & b1, bool & vomit);
     void toss(Customer contestants[], const int place, Burgermeister & Krusty);
     void turn(Customer people[], Burgermeister & Krusty, 
-    const int index);
+    const int index, bool & eaten);
     bool checkAlive();
     bool vomit(Customer people[], int index, Burgermeister & Krusty);
     friend ostream & operator<< (ostream & os, const Customer & cust);
     bool getAlive() const;
-    short getWinConditions(bool & isContestant) const;
+    
      
   private:
     string m_custName;
