@@ -110,7 +110,7 @@ void Customer::eat(const Burger & b1, bool & vomit)
 //Output done here
 //I made index constant. It should be so you keep track of the center of the loops
 void Customer::turn(Customer people[], Burgermeister & Krusty,
- const int index)
+ const int index, bool & eaten)
 {
   int i = index;
   bool ifVomit = false;
@@ -120,6 +120,7 @@ void Customer::turn(Customer people[], Burgermeister & Krusty,
   if ((m_wallet > newBurger.getPrice()) && m_isAlive && m_isContestant)
   {
     Krusty += newBurger.getPrice();
+    eaten = true;
     eat(newBurger, ifVomit);
     m_isAlive = checkAlive(); //not sure it this is necessary since you checked in eat
     if (!m_isAlive)
