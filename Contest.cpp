@@ -14,12 +14,22 @@ int main()
   Customer contestants[AMNT_OF_PEOPLE];
   Burgermeister Krusty(BURGERMEISTER_NAME,BURGERMEISTER_MONEY);
   string nextStep;
+  int rounds = 1;
+  bool eaten1;
+  //for determining winners, we just need to see to it that no one
+  //ate a burger for the entire round, and then just print all the
+  //contestants that are still in
   
   for (int j = 0; j < 10; j++)
   {
+    eaten1 = false;
+    cout << "---------- Round " << rounds << "----------" << endl;
     for(int i = 0; i < AMNT_OF_PEOPLE; i++)
-      contestants[1].turn(contestants, Krusty, 1);
+      contestants[i].turn(contestants, Krusty, 1, eaten1);
     cin << nextStep; //this is just to slow things down for now
+    rounds++;
+    if(!eaten1)
+      //print winners
   } //obviously this will need to be changed back into a do while
    
   return 0;
