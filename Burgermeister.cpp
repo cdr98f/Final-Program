@@ -26,7 +26,11 @@ void operator += (Burgermeister & lhs, const float & rhs)
 
 void operator -= (Burgermeister & lhs, const float & rhs)
 {
-  lhs.m_money -= rhs;
+  if(rhs < lhs.m_money)
+    lhs.m_money = 0; //so krusty can't run a deficit
+  else
+    lhs.m_money -= rhs;
+  
   return;
 }
 
